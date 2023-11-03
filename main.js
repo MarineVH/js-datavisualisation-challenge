@@ -8,7 +8,7 @@ const canvascontainer = {
     <div class="canvas-container">
 }
 
-insertAdjacentHTML("afterend", table)
+insertAdjacentHTML("afterend", canvascontainer)
 
 new Chart(table1, {
     type: 'bar',
