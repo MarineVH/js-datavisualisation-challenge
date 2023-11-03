@@ -1,17 +1,15 @@
-let table1 = document.getElementById("table1").innerHTML;
-let offences = table1.getElementsByTagName("td").innerHTML;
+let table1 = document.getElementById("table1");
+let offences = table1.getElementsByTagName("td");
 
-let table2 = document.getElementById("table2").innerHTML;
-let prisonpopulation = table2.getElementsByTagName("td").innerHTML;
+let table2 = document.getElementById("table2");
+let prisonpopulation = table2.getElementsByTagName("td");
 
-const canvascontainer = {
-    <div class="canvas-container">
-}
+const canvas = document.createElement("canvas");
 
-insertAdjacentHTML("afterend", canvascontainer)
+table1.parentNode.insertBefore(canvas, table1);
 
-new Chart(table1, {
-    type: 'bar',
+new Chart(canvas, {
+    type: 'line',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{
