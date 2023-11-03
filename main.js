@@ -4,44 +4,27 @@ let offences = table1.getElementsByTagName("td").innerHTML;
 let table2 = document.getElementById("table2").innerHTML;
 let prisonpopulation = table2.getElementsByTagName("td").innerHTML;
 
-const tables = document.querySelectorAll("table");
+const canvascontainer = {
+    <div class="canvas-container">
+}
 
-tables.forEach((table, index) => {
-    const canvas = document.createElement("canvas");
-    canvas.id = "chart${index}";
-    canvas.width = 400;
-    canvas.height = 200;
+insertAdjacentHTML("afterend", canvascontainer)
 
-    table.parentNode.insertBefore(canvas, table);
-
-    const labels = [];
-    const data = [];
-    const rows = table.querySelectorAll("tr");
-
-    rows.forEach((row, rowIndex) => {
-        if (rowIndex === 0) {
-            return;
+new Chart(table1, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
         }
-
-        const cells = row.querySelectorAll("td");
-        labels.push(cells[0].textContent);
-        data.push(Number(cells[1].textContent));
-    });
-
-    new Chart(canvas, {
-        type: 'line',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Chart.js Line Chart'
-                }
-            }
-        },
-    });
-})
+      }
+    }
+});
