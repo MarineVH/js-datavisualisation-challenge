@@ -1,14 +1,17 @@
 let table1 = document.getElementById("table1");
-let offences = table1.getElementsByTagName("td");
+let offences = table1.querySelectorAll("tr");
 
 let table2 = document.getElementById("table2");
-let prisonpopulation = table2.getElementsByTagName("td");
+let prisonpopulation = table2.querySelectorAll("tr");
 
 const canvas1 = document.createElement("canvas");
 const canvas2 = document.createElement("canvas");
 
 table1.parentNode.insertBefore(canvas1, table1);
 table2.parentNode.insertBefore(canvas2, table2);
+
+const labels = [];
+const data = [];
 
 new Chart(canvas1, {
     type: 'line',
