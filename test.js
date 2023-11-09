@@ -1,3 +1,5 @@
+// chart table1
+
 const table1 = document.getElementById("table1");
 let canvas = document.createElement("canvas");
 table1.parentNode.insertBefore(canvas, table1);
@@ -14,7 +16,7 @@ for (let i = 2 ; i < rows1.cells.length ; i++) {
 
 for (let i = 2 ; i < table1.rows.length ; i++) {
     let row = table1.rows[i];
-    country1.push(row.cells[1].textContent);
+    country1.push(row.cells[1].innerText);
 
     for (let i = 1 ; i < table1.rows.length ; i++) {
       let row = table1.rows[i];
@@ -42,6 +44,9 @@ new Chart(canvas, {
 });
 
 
+
+// chart table2
+
 const table2 = document.getElementById("table2");
 let newCanvas = document.createElement("canvas");
 table2.parentNode.insertBefore(newCanvas, table2);
@@ -58,7 +63,7 @@ for (let i = 2 ; i < rows2.cells.length ; i++) {
 
 for (let i = 1 ; i < table2.rows.length ; i++) {
   let row = table2.rows[i];
-  country2.push(row.cells[1].textContent);
+  country2.push(row.cells[1].innerText);
 
   for (let i = 1 ; i < table2.rows.length ; i++) {
     let row = table2.rows[i];
@@ -89,3 +94,38 @@ new Chart(newCanvas, {
     }
   }
 });
+
+
+
+// ajax & json
+
+var dataPoints = [];
+$.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", function(data) {  
+    $.each(data, function(key, value){
+        dataPoints.push({x: value[0], y: parseInt(value[1])});
+    });
+    chart = new CanvasJS.Chart("chartContainer",{
+        title:{
+            text:"Live Chart with dataPoints from External JSON"
+        },
+        data: [{
+        type: "line",
+        dataPoints : dataPoints,
+        }]
+    });
+    chart.render();
+    updateChart();
+});
+
+function updateChart() {
+  $.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=" + (dataPoints.length + 1) + "&ystart=" + (dataPoints[dataPoints.length - 1].y) + "&length=1&type=json", function(data) {
+      $.each(data, function(key, value) {
+          dataPoints.push({
+              x: parseInt(value[0]),
+              y: parseInt(value[1])
+          });
+     });
+     chart.render();
+     setTimeout(function(){updateChart()}, 1000);
+  });
+}
