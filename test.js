@@ -14,13 +14,12 @@ for (let i = 2 ; i < rows1.cells.length ; i++) {
 
 for (let i = 2 ; i < table1.rows.length ; i++) {
     let row = table1.rows[i];
-    country1.push(parseFloat(row.cells[1].textContent.replace(',', '.')));
+    country1.push(row.cells[1].textContent);
 
-    const dataCell = [];
-    for(let y = 2; y < row.cells.length; y++) {
-      dataCell.push(parseFloat(row.cells[y].textContent.replace(',', '.')));
+    for (let i = 1 ; i < table1.rows.length ; i++) {
+      let row = table1.rows[i];
+      offenses.push(parseFloat(row.cells[2].textContent.replace(",", ".")));
     }
-    offenses.push(dataCell);
 }
 
 new Chart(canvas, {
@@ -60,6 +59,11 @@ for (let i = 2 ; i < rows2.cells.length ; i++) {
 for (let i = 1 ; i < table2.rows.length ; i++) {
   let row = table2.rows[i];
   country2.push(row.cells[1].textContent);
+
+  for (let i = 1 ; i < table2.rows.length ; i++) {
+    let row = table2.rows[i];
+    prisonPopulation.push(parseFloat(row.cells[2].textContent.replace(",", ".")));
+  }
 }
 
 new Chart(newCanvas, {
