@@ -7,6 +7,8 @@ let years1 = [];
 let country1 = [];
 let offenses =[];
 
+
+
 new Chart(canvas, {
     type: 'line',
     data: {
